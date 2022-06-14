@@ -7,16 +7,12 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"go-postgresql/util"
 	"go-postgresql/controller"
 )
 
 func main () {
-	// Connect to DB
-	ctx_ret, client_ret := util.dbInit()
-
-//	router := initRouter()
-//	router.Logger.Fatal(router.Start("8082"))
+	router := initRouter()
+	router.Logger.Fatal(router.Start(":8082"))
 }
 
 func initRouter() *echo.Echo {
