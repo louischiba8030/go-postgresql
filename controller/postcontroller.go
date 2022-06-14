@@ -1,21 +1,25 @@
 package controller
 
 import (
-	"net/http"
+//	"net/http"
 	"github.com/labstack/echo/v4"
 
-	"go-postgresql/model"
-	"strconv"
+//	"go-postgresql/model"
+//	"strconv"
 	"fmt"
 )
 
 func GetAllPosts(c echo.Context) error {
-	m := []model.Post{}
-	model.DB.Find(&m)
-
-	return c.JSON(http.StatusOK, m)
+/*	users, err := client.model.Post.
+		Query().
+		All(ctx)
+	//	m := []model.Post{}
+//	model.Find(&m)
+	fmt.Println(users)
+//	return c.JSON(http.StatusOK, m)*/
+	return nil
 }
-
+/*
 func CreatePost(c echo.Context) (err error) {
 	p, _ := strconv.Atoi(c.FormValue("age"))
 	age := uint(p)
@@ -32,3 +36,4 @@ func CreatePost(c echo.Context) (err error) {
 	
 	return c.JSON(http.StatusOK, m)
 }
+*/

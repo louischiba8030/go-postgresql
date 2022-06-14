@@ -1,22 +1,45 @@
 package main
 import (
-	"context"
-	"fmt"
-	"log"
-//	"os"
-
-	"go-postgresql/config"
-	"go-postgresql/database"
-//	"go-postgresql/model"
+	"net/http"
 
 	_ "github.com/lib/pq"
 
-	"go-postgresql/ent"
-	"go-postgresql/ent/migrate"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+
+	"go-postgresql/util"
+	"go-postgresql/controller"
 )
 
 func main () {
-	//database.establish_connection()
+	// Connect to DB
+	ctx_ret, client_ret := util.dbInit()
+
+//	router := initRouter()
+//	router.Logger.Fatal(router.Start("8082"))
+}
+
+func initRouter() *echo.Echo {
+	// Create instance
+	e := echo.New()
+
+	// Set middleware
+	e.Use(middleware.CORS())
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	// Set route
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, Golang World!")
+	})
+	e.GET("/api/posts/", controller.GetAllPosts)
+//	e.POST("/api/posts/create", controller.CreatePost)
+
+	return e
+}
+
+/*
+//database.establish_connection()
 	conf := config.Config
 	client, err := ent.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",
 		conf.DbHost, conf.DbPort, conf.DbUser, conf.DbName, conf.DbPassword))
@@ -34,7 +57,5 @@ func main () {
 	}
 
 	// Call seeder (register dummy 10 posts)
-	database.InitialSeeder(ctx, client)
-
-	log.Print("ent sample done.")
-}
+	//database.InitialSeeder(ctx, client)
+*/
