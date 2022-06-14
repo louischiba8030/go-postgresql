@@ -29,7 +29,7 @@ func initRouter() *echo.Echo {
 		return c.String(http.StatusOK, "Hello, Golang World!")
 	})
 	e.GET("/api/posts/", controller.GetAllPosts)
-//	e.POST("/api/posts/create", controller.CreatePost)
+	e.POST("/api/posts/create", controller.AddPost)
 
 	return e
 }

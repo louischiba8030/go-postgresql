@@ -5,8 +5,7 @@ import (
 	"entgo.io/ent/dialect"
 //	"entgo.io/ent/schema/edge"
 	"entgo.io/ent/schema/field"
-	"entgo.io/ent/schema/index"
-//	"go-postgresql/util"
+//	"entgo.io/ent/schema/index"
 )
 
 // Post holds the schema definition for the Post entity.
@@ -48,8 +47,9 @@ func (Post) Edges() []ent.Edge {
 	return nil
 }
 
-func (Post) Indexes() []ent.Index {
+/*func (Post) Indexes() []ent.Index {
 	return []ent.Index {
 		index.Fields("name"),
 	}
 }
+*/
