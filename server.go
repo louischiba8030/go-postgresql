@@ -7,6 +7,7 @@ import (
 
 	"go-postgresql/config"
 	"go-postgresql/database"
+	"go-postgresql/model"
 
 //	"entgo.io/ent/examples/start/ent"
 	_ "github.com/lib/pq"
@@ -31,6 +32,12 @@ func main () {
 		log.Fatalf("failed printing schema changes: %v", err)
 	}
 
-	database.AddPost(ctx, client, "foo", 23, "A", "Chiba")
+	post := model.Post{
+		Name: "Miho",
+		Age: 42,
+		Bloodtype: "B",
+		Origin: "Sakado",
+	}
+	database.AddPost(ctx, client, &post)
 	log.Print("ent sample done.")
 }
