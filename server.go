@@ -8,9 +8,17 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 
 	"go-postgresql/controller"
+	"go-postgresql/util"
 )
 
+func init () {
+	util.DbInit()
+}
+
 func main () {
+//	defer r.Entclient.Close()
+//	controller.SetEntClient(&r)
+
 	router := initRouter()
 	router.Logger.Fatal(router.Start(":8082"))
 }
