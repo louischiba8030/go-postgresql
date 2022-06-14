@@ -6,7 +6,7 @@ import (
 	"github.com/oklog/ulid"
 )
 
-func GenerateULID () (string) {
+func GenerateULID () string {
 	// Generate ULID
 	t := time.Now()
 	entropy := ulid.Monotonic(rand.New(rand.NewSource(t.UnixNano())), 0)

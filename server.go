@@ -7,9 +7,8 @@ import (
 
 	"go-postgresql/config"
 	"go-postgresql/database"
-	"go-postgresql/model"
+//	"go-postgresql/model"
 
-//	"entgo.io/ent/examples/start/ent"
 	_ "github.com/lib/pq"
 
 	"go-postgresql/ent"
@@ -26,18 +25,16 @@ func main () {
 	}
 	defer client.Close()
 
+	// Drop existing table 'posts'
+
 	// Do migration
 	ctx := context.Background()
 	if err := client.Schema.Create(ctx, migrate.WithForeignKeys(false)); err != nil {
 		log.Fatalf("failed printing schema changes: %v", err)
 	}
 
-	post := model.Post{
-		Name: "Miho",
-		Age: 42,
-		Bloodtype: "B",
-		Origin: "Sakado",
-	}
-	database.AddPost(ctx, client, &post)
+	// Call seeder (register dummy 10 posts)
+	database.InitialSeeder(ctx, client)
+
 	log.Print("ent sample done.")
 }

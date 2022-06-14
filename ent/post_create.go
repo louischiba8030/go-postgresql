@@ -57,14 +57,6 @@ func (pc *PostCreate) SetID(s string) *PostCreate {
 	return pc
 }
 
-// SetNillableID sets the "id" field if the given value is not nil.
-func (pc *PostCreate) SetNillableID(s *string) *PostCreate {
-	if s != nil {
-		pc.SetID(*s)
-	}
-	return pc
-}
-
 // Mutation returns the PostMutation object of the builder.
 func (pc *PostCreate) Mutation() *PostMutation {
 	return pc.mutation
@@ -76,7 +68,6 @@ func (pc *PostCreate) Save(ctx context.Context) (*Post, error) {
 		err  error
 		node *Post
 	)
-	pc.defaults()
 	if len(pc.hooks) == 0 {
 		if err = pc.check(); err != nil {
 			return nil, err
@@ -131,14 +122,6 @@ func (pc *PostCreate) Exec(ctx context.Context) error {
 func (pc *PostCreate) ExecX(ctx context.Context) {
 	if err := pc.Exec(ctx); err != nil {
 		panic(err)
-	}
-}
-
-// defaults sets the default values of the builder before save.
-func (pc *PostCreate) defaults() {
-	if _, ok := pc.mutation.ID(); !ok {
-		v := post.DefaultID
-		pc.mutation.SetID(v)
 	}
 }
 
@@ -238,7 +221,6 @@ func (pcb *PostCreateBulk) Save(ctx context.Context) ([]*Post, error) {
 	for i := range pcb.builders {
 		func(i int, root context.Context) {
 			builder := pcb.builders[i]
-			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*PostMutation)
 				if !ok {

@@ -10,7 +10,7 @@ import (
 var (
 	// PostsColumns holds the columns for the "posts" table.
 	PostsColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeString, SchemaType: map[string]string{"postgres": "varchar(26)"}},
+		{Name: "id", Type: field.TypeString, Unique: true, SchemaType: map[string]string{"postgres": "varchar(26)"}},
 		{Name: "name", Type: field.TypeString, SchemaType: map[string]string{"postgres": "varchar(255)"}},
 		{Name: "age", Type: field.TypeInt, Nullable: true, SchemaType: map[string]string{"postgres": "int"}},
 		{Name: "bloodtype", Type: field.TypeString, SchemaType: map[string]string{"postgres": "varchar(5)"}},

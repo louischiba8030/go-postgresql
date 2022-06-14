@@ -6,7 +6,7 @@ import (
 //	"entgo.io/ent/schema/edge"
 	"entgo.io/ent/schema/field"
 	"entgo.io/ent/schema/index"
-	"go-postgresql/util"
+//	"go-postgresql/util"
 )
 
 // Post holds the schema definition for the Post entity.
@@ -21,7 +21,8 @@ func (Post) Fields() []ent.Field {
 			SchemaType(map[string]string{
 				dialect.Postgres: "varchar(26)",
 			}).
-			Default(util.GenerateULID()),
+			Unique(),
+//			Default(util.GenerateULID()),
 		field.String("name").
 		SchemaType(map[string]string{
 			dialect.Postgres: "varchar(255)",
