@@ -8,17 +8,13 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 
 	"go-postgresql/controller"
-	"go-postgresql/util"
+//	"go-postgresql/util"
 )
 
 func init () {
-	util.DbInit()
 }
 
 func main () {
-//	defer r.Entclient.Close()
-//	controller.SetEntClient(&r)
-
 	router := initRouter()
 	router.Logger.Fatal(router.Start(":8082"))
 }
@@ -37,7 +33,10 @@ func initRouter() *echo.Echo {
 		return c.String(http.StatusOK, "Hello, Golang World!")
 	})
 	e.GET("/api/posts/", controller.GetAllPosts)
+	e.GET("/api/posts/:id", controller.GetPost)
 	e.POST("/api/posts/create", controller.AddPost)
+	e.PUT("/api/posts/:id", controller.UpdatePost)
+	e.DELETE("/api/posts/:id", controller.DeletePost)
 
 	return e
 }
