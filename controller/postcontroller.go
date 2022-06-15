@@ -34,7 +34,7 @@ func GetAllPosts(c echo.Context) (err error) {
 }
 
 func AddPost (c echo.Context) error {
-	util.DbInit()
+	util.DbInit_pgx()
 	defer util.Ent().Close()
 	ctx := context.Background()
 
@@ -61,7 +61,7 @@ func AddPost (c echo.Context) error {
 }
 
 func GetPost (c echo.Context) error {
-	util.DbInit()
+	util.DbInit_pgx()
 	defer util.Ent().Close()
 	ctx := context.Background()
 
@@ -78,7 +78,7 @@ func GetPost (c echo.Context) error {
 }
 
 func UpdatePost (c echo.Context) error {
-	util.DbInit()
+	util.DbInit_pgx()
 	defer util.Ent().Close()
 	ctx := context.Background()
 
@@ -101,7 +101,7 @@ func UpdatePost (c echo.Context) error {
 }
 
 func DeletePost (c echo.Context) error {
-	util.DbInit()
+	util.DbInit_pgx()
 	defer util.Ent().Close()
 	ctx := context.Background()
 
