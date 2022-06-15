@@ -9,16 +9,14 @@ import (
 	"go-postgresql/ent/post"
 
 	"log"
-////	"strconv"
+	"strconv"
 //	"reflect"
 )
 
 
 func GetAllPosts(c echo.Context) (err error) {
+	defer util.Ent().Close()
 	ctx := context.Background()
-	//	err = util.DbInit()
-	/* OK : 	r := *util.DbInit()
-	defer r.Client.Close()*/
 
 	// Get all records and sort by ID
 	posts, err := util.Ent().Debug().Post.
@@ -32,17 +30,17 @@ func GetAllPosts(c echo.Context) (err error) {
 	return c.JSON(http.StatusOK, posts) //*/ return nil
 }
 
-func AddPost (c echo.Context) error { // ctx context.Context, client *ent.Client, dPointer *model.Post) (*ent.Post, error) {
-/*	ctx, client := util.DbInit()
-	defer client.Close()
+func AddPost (c echo.Context) error {
+	defer util.Ent().Close()
+	ctx := context.Background()
 
 	p, _ := strconv.Atoi(c.FormValue("age"))
 	age := int(p)
-	//d := *dPointer
+
 	// Generate ULID
 	ulid := util.GenerateULID()
 
-	newuser, err := client.Debug().Post.
+	newuser, err := util.Ent().Debug().Post.
 		Create().
 		SetID(ulid).
 		SetName(c.FormValue("name")).
@@ -55,5 +53,5 @@ func AddPost (c echo.Context) error { // ctx context.Context, client *ent.Client
 	}
 	log.Printf("user: %+v", newuser)
 
-	return c.JSON(http.StatusOK, newuser) */ return nil
+	return c.JSON(http.StatusOK, newuser)
 }
