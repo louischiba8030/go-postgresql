@@ -15,7 +15,9 @@ import (
 
 
 func GetAllPosts(c echo.Context) (err error) {
-	util.DbInit()
+//	util.DbInit()
+//	defer util.Ent().Close()
+	util.DbInit_pgx()
 	defer util.Ent().Close()
 	ctx := context.Background()
 
